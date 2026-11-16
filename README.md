@@ -44,7 +44,7 @@ The Autodesk Design and Make Marketplace installer registers the application aut
 
 Renaming uses AutoCAD's standard `-RENAME` command and remains available to AutoCAD's normal Undo workflow while the drawing is open. Manually entered script lines run as written and should be reviewed carefully.
 
-The protected Standard table style is intentionally excluded because AutoCAD does not permit it to be renamed.
+The protected Standard table style and Standard text style are intentionally excluded because AutoCAD does not permit them to be renamed.
 
 ## Development and packaging
 

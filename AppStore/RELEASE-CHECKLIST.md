@@ -20,7 +20,7 @@
 - Sort Layers by Frozen and Locked in both ascending and descending order.
 - Test exact and `*` filters, independent tab selections, prefix, suffix, find/replace, exact single-object naming, mixed-category staging, manual edits, comments, copy, save, clear, execution, and Undo.
 - Verify same-category collision warnings do not incorrectly flag identical names in different categories.
-- Verify layer `0`, Defpoints, reserved linetypes, the Standard table style, layout/anonymous blocks, and dependent xref records are excluded.
+- Verify layer `0`, Defpoints, reserved linetypes, the Standard table style, the Standard text style, layout/anonymous blocks, and dependent xref records are excluded.
 - Test Windows light/dark themes and 100%, 125%, and 150% scaling.
 - Verify Help, License, Privacy, GitHub, and LinkedIn links.
 
@@ -35,7 +35,7 @@
 ## Submission
 
 - Enter `owackenreuther@gmail.com` in the Marketplace form.
-- Upload the 120 Ã— 120 icon.
+- Upload the 120 × 120 icon.
 - Upload at least three captioned screenshots: main dark-theme UI, detailed Layers grid, and another category with the combined script. Add a light-theme screenshot if space permits.
 - Claim only tested AutoCAD versions and industry verticals.
 - Submit `Renamer-1.0.0-Autodesk-Marketplace.zip`.

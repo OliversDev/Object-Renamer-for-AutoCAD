@@ -118,6 +118,29 @@ if ($thirdPartyNoticeText -notmatch 'Dazzle Pro Icons' -or
     throw "THIRD-PARTY-NOTICES.txt must identify the licensed Dazzle social icons and exclude them from the MIT License."
 }
 
+$mainFormSourcePath = Join-Path $repositoryRoot "Renamer App for AutoCAD\MainForm.cs"
+$mainFormSource = Get-Content -LiteralPath $mainFormSourcePath -Raw
+if ($mainFormSource -notmatch 'ObjectKind\.TextStyles,\s*new ObjectDefinition\(ObjectKind\.TextStyles,\s*"Text Style",\s*"Text Styles",\s*"Style"\)') {
+    throw "Text Styles must generate AutoCAD -RENAME commands with the valid Style keyword."
+}
+if ($mainFormSource -notmatch '(?s)private void LoadTextStyles.*?!string\.Equals\(record\.Name,\s*"Standard",\s*StringComparison\.OrdinalIgnoreCase\)') {
+    throw "The protected Standard text style must be excluded from the Text Styles tab."
+}
+if ($mainFormSource -notmatch 'The Standard text style is protected by AutoCAD and cannot be renamed\.') {
+    throw "Manual scripts must also be prevented from renaming the protected Standard text style."
+}
+
+$documentationFiles = @(
+    (Join-Path $repositoryRoot "AppStore\STORE-LISTING.md"),
+    (Join-Path $repositoryRoot "AppStore\AUTODESK-MARKETPLACE-COMPLIANCE.md"),
+    (Join-Path $repositoryRoot "AppStore\RELEASE-CHECKLIST.md")
+)
+foreach ($documentationFile in $documentationFiles) {
+    if ((Get-Content -LiteralPath $documentationFile -Raw) -match '\u00C3|\u00E2\u20AC') {
+        throw "UTF-8 mojibake remains in '$documentationFile'."
+    }
+}
+
 New-Item -ItemType Directory -Path $artifactsRoot -Force | Out-Null
 
 if (Test-Path -LiteralPath $bundle) {

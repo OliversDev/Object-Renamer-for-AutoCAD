@@ -401,7 +401,8 @@ namespace AutoCADRenamer
             LoadSymbolTable(
                 database.TextStyleTableId,
                 transaction,
-                IsStandardRecordRenameable,
+                record => IsStandardRecordRenameable(record) &&
+                          !string.Equals(record.Name, "Standard", StringComparison.OrdinalIgnoreCase),
                 record =>
                 {
                     var style = (TextStyleTableRecord)record;
@@ -723,6 +724,13 @@ namespace AutoCADRenamer
                 return;
             }
 
+            string protectedRenameError = FindProtectedRenameError(commands);
+            if (!string.IsNullOrEmpty(protectedRenameError))
+            {
+                ShowMessageDialog(protectedRenameError, "Renamer", MessageBoxIcon.Warning);
+                return;
+            }
+
             string warning = BuildScriptConflictWarning(commands);
             bool confirmed = string.IsNullOrEmpty(warning)
                 ? ShowConfirmationDialog("Run " + commands.Length + " script command" + (commands.Length == 1 ? "?" : "s?"), "Renamer")
@@ -765,6 +773,20 @@ namespace AutoCADRenamer
                 sections.Add("The same existing object is being renamed more than once:\r\n" +
                              string.Join("\r\n", repeatedSources.Select(value => "  • " + value)));
             return string.Join("\r\n\r\n", sections);
+        }
+
+        private static string FindProtectedRenameError(IEnumerable<string> scriptLines)
+        {
+            foreach (ScriptRenameCommand command in scriptLines.Select(ParseRenameCommand).Where(item => item != null))
+            {
+                if (!string.Equals(command.OldName, "Standard", StringComparison.OrdinalIgnoreCase)) continue;
+                if (command.Kind == ObjectKind.TextStyles)
+                    return "The Standard text style is protected by AutoCAD and cannot be renamed.";
+                if (command.Kind == ObjectKind.TableStyles)
+                    return "The Standard table style is protected by AutoCAD and cannot be renamed.";
+            }
+
+            return null;
         }
 
         private static string FormatConflict(ObjectKind kind, string name)
@@ -907,7 +929,7 @@ namespace AutoCADRenamer
                 { ObjectKind.DimensionStyles, new ObjectDefinition(ObjectKind.DimensionStyles, "Dimension Style", "Dimension Styles", "Dimstyle") },
                 { ObjectKind.Linetypes, new ObjectDefinition(ObjectKind.Linetypes, "Linetype", "Linetypes", "LType") },
                 { ObjectKind.TableStyles, new ObjectDefinition(ObjectKind.TableStyles, "Table Style", "Table Styles", "Tablestyle") },
-                { ObjectKind.TextStyles, new ObjectDefinition(ObjectKind.TextStyles, "Text Style", "Text Styles", "textStyle") }
+                { ObjectKind.TextStyles, new ObjectDefinition(ObjectKind.TextStyles, "Text Style", "Text Styles", "Style") }
             };
 
             private ObjectDefinition(ObjectKind kind, string singularName, string pluralName, string commandKeyword)

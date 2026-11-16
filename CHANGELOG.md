@@ -22,3 +22,6 @@
 - Added the publisher support email to the package manifest, privacy policy, help, and Marketplace listing.
 - Retained the licensed LinkedIn and GitHub footer images and documented their exclusion from the MIT License.
 - Added package validation for publisher contact details, privacy/support content, and licensed footer assets.
+- Corrected Text Styles script generation to use AutoCAD's valid `Style` keyword.
+- Excluded the protected Standard text style from the Text Styles tab.
+- Corrected three UTF-8 documentation characters damaged by an earlier update.

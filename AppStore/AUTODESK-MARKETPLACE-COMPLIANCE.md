@@ -31,7 +31,7 @@
 - Confirm the public privacy-policy and support URLs resolve without authentication.
 - Enter `owackenreuther@gmail.com` in the Marketplace form exactly as it appears in `PackageContents.xml`.
 - Test both supported AutoCAD versions and contextual F1 help.
-- Upload the 120 Ã— 120 icon and at least three captioned screenshots: the main dark-theme UI, the detailed Layers grid, and another object category/script workflow. Add a light-theme screenshot if space permits.
+- Upload the 120 × 120 icon and at least three captioned screenshots: the main dark-theme UI, the detailed Layers grid, and another object category/script workflow. Add a light-theme screenshot if space permits.
 - Claim only AutoCAD versions and industry verticals that were actually tested.
 
 ## Future versions
