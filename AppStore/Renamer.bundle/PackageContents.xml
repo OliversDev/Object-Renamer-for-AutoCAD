@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationPackage SchemaVersion="1.0"
                     AutodeskProduct="AutoCAD"
                     ProductType="Application"
@@ -14,7 +14,8 @@
                     Helpfile="./Contents/Help/Renamer.html"
                     OnlineDocumentation="https://github.com/OliversDev/Renamer-App-for-AutoCAD">
   <CompanyDetails Name="Oliver Wackenreuther"
-                  Url="https://github.com/OliversDev" />
+                  URL="https://github.com/OliversDev"
+                  Email="owackenreuther@gmail.com" />
 
   <Components Description="AutoCAD 2026">
     <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R25.1" SeriesMax="R25.1" SupportPath="./Contents/Help" />
@@ -48,3 +49,4 @@
     </ComponentEntry>
   </Components>
 </ApplicationPackage>
+

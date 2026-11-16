@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — November 4, 2026
+## 1.0.0 — November 6, 2026
 
 - Introduced Renamer for layers, blocks, dimension styles, linetypes, table styles, and text styles.
 - Added category tabs with independent filters and selections.
@@ -19,3 +19,6 @@
 - Reapplied the themed scrollbar corner after native grid layout, scrolling, resizing, and data binding so WinForms cannot repaint it white.
 - Excluded the protected Standard table style from the Table Styles tab.
 - Enlarged the ribbon artwork to match the visual scale of Batch Scripter.
+- Added the publisher support email to the package manifest, privacy policy, help, and Marketplace listing.
+- Retained the licensed LinkedIn and GitHub footer images and documented their exclusion from the MIT License.
+- Added package validation for publisher contact details, privacy/support content, and licensed footer assets.

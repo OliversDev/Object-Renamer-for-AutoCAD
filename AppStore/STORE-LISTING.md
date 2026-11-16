@@ -1,4 +1,4 @@
-# Renamer for AutoCAD
+﻿# Renamer for AutoCAD
 
 ## Short description
 
@@ -28,6 +28,8 @@ Close AutoCAD. Open **Windows Settings > Apps > Installed apps**, select **Renam
 
 https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues
 
+Email: owackenreuther@gmail.com
+
 Include the AutoCAD version, Renamer version, reproducible steps, and any displayed error. Do not include confidential drawings or object names.
 
 ## Compatibility and limitations
@@ -36,11 +38,11 @@ Renamer supports 64-bit AutoCAD 2026 and AutoCAD 2027. AutoCAD may reject a rena
 
 ## Commands
 
-- `OW:Renamer` — opens Renamer.
+- `OW:Renamer` â€” opens Renamer.
 
 ## Privacy
 
-Renamer processes drawing data locally and does not collect or transmit personal information, drawing information, object names, telemetry, or analytics.
+Renamer processes drawing data locally and does not collect, transmit, sell, rent, or share personal information, drawing information, object names, usage information, telemetry, or analytics.
 
 https://github.com/OliversDev/Renamer-App-for-AutoCAD/blob/master/PRIVACY.md
 
@@ -52,3 +54,4 @@ https://github.com/OliversDev/Renamer-App-for-AutoCAD/blob/master/PRIVACY.md
 - `Assets/RenamerIcon.ico`
 - `Assets/RenamerIcon.svg`
 - `Assets/RenamerRibbon.svg`
+

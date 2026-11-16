@@ -52,8 +52,70 @@ if (-not (Test-Path -LiteralPath $storeListing -PathType Leaf) -or
     throw "STORE-LISTING.md must contain the explicit Renamer support page."
 }
 
-if (-not (Test-Path -LiteralPath (Join-Path $bundleTemplate "PackageContents.xml") -PathType Leaf)) {
+$manifestTemplatePath = Join-Path $bundleTemplate "PackageContents.xml"
+if (-not (Test-Path -LiteralPath $manifestTemplatePath -PathType Leaf)) {
     throw "The bundle template is incomplete: '$bundleTemplate'."
+}
+
+$manifestTemplateText = Get-Content -LiteralPath $manifestTemplatePath -Raw
+if ($manifestTemplateText -cmatch 'CompanyDetails[\s\S]*?\sUrl=' -or
+    $manifestTemplateText -cnotmatch 'CompanyDetails[\s\S]*?\sURL=') {
+    throw "CompanyDetails must use the documented uppercase URL attribute."
+}
+
+[xml]$manifestTemplate = $manifestTemplateText
+$companyDetails = $manifestTemplate.ApplicationPackage.CompanyDetails
+$supportEmail = [string]$companyDetails.Email
+if ([string]::IsNullOrWhiteSpace($supportEmail) -or
+    $supportEmail -match '[{}]' -or
+    $supportEmail -notmatch '^[^\s@]+@[^\s@]+\.[^\s@]+$') {
+    throw "CompanyDetails must contain the final publisher support email. Run the compliance update BAT and enter a valid email address."
+}
+
+if ([string]::IsNullOrWhiteSpace([string]$companyDetails.Name) -or
+    [string]::IsNullOrWhiteSpace([string]$companyDetails.URL)) {
+    throw "CompanyDetails must contain Name, URL, and Email."
+}
+
+$supportUrl = "https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues"
+$contactDocuments = @(
+    (Join-Path $repositoryRoot "README.md"),
+    (Join-Path $repositoryRoot "PRIVACY.md"),
+    $storeListing,
+    (Join-Path $bundleTemplate "Contents\Help\Renamer.html"),
+    (Join-Path $bundleTemplate "Contents\Help\index.html"),
+    (Join-Path $bundleTemplate "Contents\Help\privacy.html")
+)
+
+foreach ($contactDocument in $contactDocuments) {
+    if (-not (Test-Path -LiteralPath $contactDocument -PathType Leaf)) {
+        throw "Required contact document was not found: '$contactDocument'."
+    }
+
+    $contactText = Get-Content -LiteralPath $contactDocument -Raw
+    if ($contactText -notmatch [regex]::Escape($supportEmail) -or
+        $contactText -notmatch [regex]::Escape($supportUrl) -or
+        $contactText -match '\{\{SUPPORT_EMAIL\}\}') {
+        throw "Support details are incomplete or inconsistent in '$contactDocument'."
+    }
+}
+
+$licensedIconFiles = @(
+    (Join-Path $repositoryRoot "Renamer App for AutoCAD\Resources\LI-In-Bug.png"),
+    (Join-Path $repositoryRoot "Renamer App for AutoCAD\Resources\github-mark-white.png")
+)
+foreach ($licensedIconFile in $licensedIconFiles) {
+    if (-not (Test-Path -LiteralPath $licensedIconFile -PathType Leaf)) {
+        throw "A required licensed footer icon is missing: '$licensedIconFile'."
+    }
+}
+
+$thirdPartyNoticePath = Join-Path $repositoryRoot "THIRD-PARTY-NOTICES.txt"
+$thirdPartyNoticeText = Get-Content -LiteralPath $thirdPartyNoticePath -Raw
+if ($thirdPartyNoticeText -notmatch 'Dazzle Pro Icons' -or
+    $thirdPartyNoticeText -notmatch 'Purchased Dazzle-UI Professional Solo License' -or
+    $thirdPartyNoticeText -notmatch 'not\s+covered\s+by\s+the\s+MIT\s+License') {
+    throw "THIRD-PARTY-NOTICES.txt must identify the licensed Dazzle social icons and exclude them from the MIT License."
 }
 
 New-Item -ItemType Directory -Path $artifactsRoot -Force | Out-Null
@@ -153,6 +215,12 @@ if ($null -ne $macroNode.SelectSingleNode("CLICommand") -or
 }
 
 [xml]$manifestDefinition = Get-Content -LiteralPath (Join-Path $bundle "PackageContents.xml") -Raw
+$stagedCompanyDetails = $manifestDefinition.ApplicationPackage.CompanyDetails
+if ([string]$stagedCompanyDetails.Email -ne $supportEmail -or
+    [string]$stagedCompanyDetails.URL -ne [string]$companyDetails.URL) {
+    throw "The staged bundle publisher details do not match the validated source manifest."
+}
+
 $componentSets = @($manifestDefinition.ApplicationPackage.Components)
 if ($componentSets.Count -ne 2) {
     throw "PackageContents.xml must contain exactly the AutoCAD 2026 and AutoCAD 2027 component sets."
@@ -269,6 +337,14 @@ try {
         if ($archiveNames -notcontains $archivePath) {
             throw "The generated Marketplace ZIP is missing: '$archivePath'."
         }
+    }
+
+    $unexpectedEntries = @($archiveNames | Where-Object {
+        $_ -notlike "Renamer.bundle\*" -or
+        $_ -match '\.(pdb|cs|resx|bak)$'
+    })
+    if ($unexpectedEntries.Count -gt 0) {
+        throw "The generated Marketplace ZIP contains unexpected files: $($unexpectedEntries -join ', ')."
     }
 }
 finally {

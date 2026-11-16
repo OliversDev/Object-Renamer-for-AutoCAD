@@ -3,9 +3,10 @@ Copyright (c) Dazzle-UI, Inc. All Rights Reserved.
 License: Purchased Dazzle-UI Professional Solo License
 
 Renamer uses licensed Dazzle Pro GitHub and LinkedIn icons as part of the
-Renamer end product. The Dazzle assets are proprietary and may not be
-copied, extracted, reproduced, redistributed, sublicensed, resold, or reused
-outside the compiled application.
+Renamer end product. These proprietary icon files are not covered by the MIT
+License in LICENSE.txt or LICENSE.html. No rights to copy, extract, reproduce,
+redistribute, sublicense, resell, or reuse them are granted by this repository;
+their use remains subject to the purchased Dazzle license.
 
 https://dazzleui.pro/
 

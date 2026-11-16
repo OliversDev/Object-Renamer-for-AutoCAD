@@ -1,4 +1,4 @@
-# Renamer for AutoCAD
+﻿# Renamer for AutoCAD
 
 Renamer is an AutoCAD add-in for batch-renaming named drawing objects through a common, reviewable workflow.
 
@@ -54,14 +54,15 @@ The solution builds AutoCAD 2026 with .NET 8 and AutoCAD 2027 with .NET 10. Run 
 AppStore\artifacts\Renamer-1.0.0-Autodesk-Marketplace.zip
 ```
 
-The update package includes `Apply-Build-Install-Renamer-2026-2027.bat`. It renames the local repository folder, replaces the source files without creating backups, builds both targets, removes old Renamer and former product bundles, installs `%APPDATA%\Autodesk\ApplicationPlugins\Renamer.bundle`, and leaves the CMD window open with the result.
+Run `Apply-Build-Install-Renamer-2026-2027.bat` from the repository root for local testing. It creates no source-file backups, builds both targets, removes only the known Renamer test bundles from the current user's Autodesk plug-in folder, installs `%APPDATA%\Autodesk\ApplicationPlugins\Renamer.bundle`, verifies the installed files, and leaves the CMD window open with the complete result.
 
 ## Privacy and support
 
 Renamer does not collect or transmit drawing information, object names, personal information, telemetry, or analytics. See [PRIVACY.md](PRIVACY.md).
 
-Report issues at [Renamer support](https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues). Do not attach confidential drawings or object names.
+Report issues at [Renamer support](https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues) or email [owackenreuther@gmail.com](mailto:owackenreuther@gmail.com). Do not attach confidential drawings or object names.
 
 ## License
 
 See [LICENSE.html](LICENSE.html) and [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
+

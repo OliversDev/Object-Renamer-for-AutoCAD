@@ -1,8 +1,9 @@
-# Renamer Autodesk Marketplace compliance
+﻿# Renamer Autodesk Marketplace compliance
 
 ## Package and compatibility
 
 - Product name, namespace, product/upgrade codes, assembly, bundle, command, help, CUIX, icon, and documentation use Renamer identifiers.
+- `CompanyDetails` includes the documented `Name`, `URL`, and `Email` attributes. The same support email appears in the privacy policy, bundled help, listing copy, and Marketplace form.
 - AutoCAD 2026 uses .NET 8 and exact series `R25.1`; AutoCAD 2027 uses .NET 10 and exact series `R26.0`.
 - `OW:Renamer` is demand-loaded and mapped to local contextual F1 help.
 
@@ -17,16 +18,25 @@
 
 - Processing is local; no telemetry, analytics, cloud processing, advertising, tracking, or application logs are used.
 - No third-party executable DLL is included. Runtime dependencies are Autodesk's managed AutoCAD API, Microsoft .NET, and Windows system libraries used for UI theming.
+- The licensed Dazzle GitHub and LinkedIn footer images are embedded application resources. They are identified in `THIRD-PARTY-NOTICES.txt` and expressly excluded from the repository's MIT License grant.
 - The application reads the Windows app-theme registry value but does not create, change, or delete registry values.
 
 ## Build safeguards
 
-- `build-app-store.ps1` validates both AutoCAD API installations, ribbon merge and F1 configuration, manifest ranges, command registration, required files, and final archive contents.
-- `Apply-Build-Install-Renamer-2026-2027.bat` renames the repository folder, replaces source files without backups, builds both targets, removes obsolete bundles, installs the current user-level test bundle, verifies hashes, and preserves all output in a visible CMD window.
+- `build-app-store.ps1` validates both AutoCAD API installations, publisher contact details, privacy/support content, dependency and asset policy, ribbon merge and F1 configuration, manifest ranges, command registration, required files, and final archive contents.
+- `Apply-Build-Install-Renamer-2026-2027.bat` creates no source-file backups, builds both targets, removes only known Renamer test bundles, installs the current user-level bundle, verifies hashes, and preserves all output in a visible CMD window.
 
-## Publisher actions
+## Publisher actions before submission
 
-- Rename the GitHub repository to `Renamer App for AutoCAD` so its URL becomes `Renamer-App-for-AutoCAD`.
-- Publish the privacy policy and support page before submission.
-- Add the publisher support email required by the Marketplace portal/manifest when the final support address is chosen.
-- Test both supported AutoCAD versions and contextual F1 help before submission.
+- Confirm the public privacy-policy and support URLs resolve without authentication.
+- Enter `owackenreuther@gmail.com` in the Marketplace form exactly as it appears in `PackageContents.xml`.
+- Test both supported AutoCAD versions and contextual F1 help.
+- Upload the 120 Ã— 120 icon and at least three captioned screenshots: the main dark-theme UI, the detailed Layers grid, and another object category/script workflow. Add a light-theme screenshot if space permits.
+- Claim only AutoCAD versions and industry verticals that were actually tested.
+
+## Future versions
+
+- Keep `UpgradeCode` stable across releases.
+- Generate a new `ProductCode` whenever `AppVersion` changes.
+- Update `FriendlyVersion`, listing copy, changelog, screenshots, and compatibility ranges together.
+
