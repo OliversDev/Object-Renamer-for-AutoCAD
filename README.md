@@ -1,6 +1,6 @@
-﻿# Renamer for AutoCAD
+# Object Renamer
 
-Renamer is an AutoCAD add-in for batch-renaming named drawing objects through a common, reviewable workflow.
+Object Renamer is an AutoCAD add-in for batch-renaming named drawing objects through a common, reviewable workflow.
 
 ## Supported objects
 
@@ -34,7 +34,7 @@ Renamer is an AutoCAD add-in for batch-renaming named drawing objects through a 
 
 ## Installation and use
 
-The Autodesk Design and Make Marketplace installer registers the application automatically. For local testing, copy `Renamer.bundle` to `%APPDATA%\Autodesk\ApplicationPlugins`, restart AutoCAD, and open **Renamer** from the standard **Add-ins** ribbon tab or enter `OW:Renamer`.
+The Autodesk Design and Make Marketplace installer registers the application automatically. For local testing, copy `ObjectRenamer.bundle` to `%APPDATA%\Autodesk\ApplicationPlugins`, restart AutoCAD, and open **Object Renamer** from the standard **Add-ins** ribbon tab or enter `OW:ObjectRenamer`.
 
 1. Choose an object-category tab.
 2. Select one or more objects.
@@ -51,16 +51,16 @@ The protected Standard table style and Standard text style are intentionally exc
 The solution builds AutoCAD 2026 with .NET 8 and AutoCAD 2027 with .NET 10. Run `build-app-store.ps1` to validate, build, stage, and create:
 
 ```text
-AppStore\artifacts\Renamer-1.0.0-Autodesk-Marketplace.zip
+AppStore\artifacts\Object-Renamer-1.0.0-Autodesk-Marketplace.zip
 ```
 
-Run `Apply-Build-Install-Renamer-2026-2027.bat` from the repository root for local testing. It creates no source-file backups, builds both targets, removes only the known Renamer test bundles from the current user's Autodesk plug-in folder, installs `%APPDATA%\Autodesk\ApplicationPlugins\Renamer.bundle`, verifies the installed files, and leaves the CMD window open with the complete result.
+Run `Apply-Build-Install-Object-Renamer-2026-2027.bat` from the repository root for local testing. It creates no source-file backups, builds both targets, removes only the known Object Renamer test bundles from the current user's Autodesk plug-in folder, installs `%APPDATA%\Autodesk\ApplicationPlugins\ObjectRenamer.bundle`, verifies the installed files, and leaves the CMD window open with the complete result.
 
 ## Privacy and support
 
-Renamer does not collect or transmit drawing information, object names, personal information, telemetry, or analytics. See [PRIVACY.md](PRIVACY.md).
+Object Renamer does not collect or transmit drawing information, object names, personal information, telemetry, or analytics. See [PRIVACY.md](PRIVACY.md).
 
-Report issues at [Renamer support](https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues) or email [owackenreuther@gmail.com](mailto:owackenreuther@gmail.com). Do not attach confidential drawings or object names.
+Report issues at [Object Renamer support](https://github.com/OliversDev/Object-Renamer-for-AutoCAD/issues) or email [owackenreuther@gmail.com](mailto:owackenreuther@gmail.com). Do not attach confidential drawings or object names.
 
 ## License
 

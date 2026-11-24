@@ -1,11 +1,11 @@
-﻿# Renamer Autodesk Marketplace compliance
+# Object Renamer Autodesk Marketplace compliance
 
 ## Package and compatibility
 
-- Product name, namespace, product/upgrade codes, assembly, bundle, command, help, CUIX, icon, and documentation use Renamer identifiers.
+- Product name, namespace, product/upgrade codes, assembly, bundle, command, help, CUIX, icon, and documentation use Object Renamer identifiers.
 - `CompanyDetails` includes the documented `Name`, `URL`, and `Email` attributes. The same support email appears in the privacy policy, bundled help, listing copy, and Marketplace form.
 - AutoCAD 2026 uses .NET 8 and exact series `R25.1`; AutoCAD 2027 uses .NET 10 and exact series `R26.0`.
-- `OW:Renamer` is demand-loaded and mapped to local contextual F1 help.
+- `OW:ObjectRenamer` is demand-loaded and mapped to local contextual F1 help.
 
 ## User experience
 
@@ -24,7 +24,7 @@
 ## Build safeguards
 
 - `build-app-store.ps1` validates both AutoCAD API installations, publisher contact details, privacy/support content, dependency and asset policy, ribbon merge and F1 configuration, manifest ranges, command registration, required files, and final archive contents.
-- `Apply-Build-Install-Renamer-2026-2027.bat` creates no source-file backups, builds both targets, removes only known Renamer test bundles, installs the current user-level bundle, verifies hashes, and preserves all output in a visible CMD window.
+- `Apply-Build-Install-Object-Renamer-2026-2027.bat` creates no source-file backups, builds both targets, removes only known Object Renamer test bundles, installs the current user-level bundle, verifies hashes, and preserves all output in a visible CMD window.
 
 ## Publisher actions before submission
 

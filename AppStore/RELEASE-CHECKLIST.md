@@ -1,18 +1,18 @@
-﻿# Autodesk Marketplace release checklist
+# Autodesk Marketplace release checklist
 
 ## Build and package
 
 - Close AutoCAD 2026 and 2027.
 - Install the .NET 8 and .NET 10 SDKs and both AutoCAD managed API sets.
-- Run `Apply-Build-Install-Renamer-2026-2027.bat`.
-- Confirm `AppStore\artifacts\Renamer-1.0.0-Autodesk-Marketplace.zip` opens correctly.
-- Confirm the ZIP contains one top-level `Renamer.bundle` folder and no PDB, source, or backup files.
+- Run `Apply-Build-Install-Object-Renamer-2026-2027.bat`.
+- Confirm `AppStore\artifacts\Object-Renamer-1.0.0-Autodesk-Marketplace.zip` opens correctly.
+- Confirm the ZIP contains one top-level `ObjectRenamer.bundle` folder and no PDB, source, or backup files.
 
 ## Functional testing
 
-- Confirm the Renamer panel appears only on AutoCAD's standard Add-ins tab.
-- Hover over the ribbon button and press F1; confirm Renamer help opens.
-- Test the ribbon button and `OW:Renamer` in AutoCAD 2026 and 2027.
+- Confirm the Object Renamer panel appears only on AutoCAD's standard Add-ins tab.
+- Hover over the ribbon button and press F1; confirm Object Renamer help opens.
+- Test the ribbon button and `OW:ObjectRenamer` in AutoCAD 2026 and 2027.
 - Test all tabs: Layers, Blocks, Dimension Styles, Linetypes, Table Styles, and Text Styles.
 - Confirm the category selector has no light native-tab frame in either Windows theme and the active category has the accent outline.
 - Drag each visible grid-column divider, narrow the window, and confirm the horizontal scrollbar exposes the complete grid.
@@ -38,6 +38,6 @@
 - Upload the 120 × 120 icon.
 - Upload at least three captioned screenshots: main dark-theme UI, detailed Layers grid, and another category with the combined script. Add a light-theme screenshot if space permits.
 - Claim only tested AutoCAD versions and industry verticals.
-- Submit `Renamer-1.0.0-Autodesk-Marketplace.zip`.
+- Submit `Object-Renamer-1.0.0-Autodesk-Marketplace.zip`.
 - For future releases, keep the UpgradeCode stable and generate a new ProductCode when AppVersion changes.
 

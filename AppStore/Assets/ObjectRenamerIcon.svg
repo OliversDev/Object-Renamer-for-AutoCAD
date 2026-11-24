@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>Object Renamer icon</title>
+  <rect x="112" y="112" width="800" height="800" rx="155" fill="#4ba9e6"/>
+  <path d="M225 400H800L675 275M800 400L675 525" fill="none" stroke="#ffffff" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M800 655H225L350 530M225 655L350 780" fill="none" stroke="#31556f" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

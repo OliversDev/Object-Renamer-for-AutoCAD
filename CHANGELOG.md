@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.0 — November 6, 2026
+## 1.0.0 â€” November 6, 2026
 
-- Introduced Renamer for layers, blocks, dimension styles, linetypes, table styles, and text styles.
+- Introduced Object Renamer for layers, blocks, dimension styles, linetypes, table styles, and text styles.
 - Added category tabs with independent filters and selections.
 - Added prefix, suffix, case-insensitive find/replace, and exact single-object rename workflows.
 - Added an editable mixed-category AutoCAD script with copy, save, clear, and run actions.
@@ -10,7 +10,10 @@
 - Excluded protected, anonymous, layout, externally dependent, and reserved records.
 - Added AutoCAD 2026/.NET 8 and AutoCAD 2027/.NET 10 targets.
 - Added built-in Add-ins ribbon integration and contextual F1 help.
-- Added a new generic Renamer icon family, Marketplace package, documentation, privacy policy, and license.
+- Renamed the application to Object Renamer; the local repository folder is Object Renamer for AutoCAD and the GitHub slug is Object-Renamer-for-AutoCAD.
+- Replaced the lettered icon with a text-free, enlarged bidirectional-arrow icon and used it consistently in the form, ribbon, bundle, and Marketplace assets.
+- Corrected the contextual F1 command, tooltip help source, packaged help file, and HTML anchor so they resolve to one matching help target.
+- Added a new generic Object Renamer icon family, Marketplace package, documentation, privacy policy, and license.
 - Restored the detailed Layers grid columns for colour, linetype, frozen state, and locked state.
 - Replaced the native category tabs with modern flat, theme-aware category buttons and removed the native white tab frame in dark mode.
 - Enabled manual grid-column resizing and horizontal scrolling for wide column layouts.

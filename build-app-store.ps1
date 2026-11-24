@@ -6,12 +6,12 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 $repositoryRoot = $PSScriptRoot
-$project = Join-Path $repositoryRoot "Renamer App for AutoCAD\Renamer App for AutoCAD.csproj"
-$bundleTemplate = Join-Path $repositoryRoot "AppStore\Renamer.bundle"
+$project = Join-Path $repositoryRoot "Object Renamer\Object Renamer.csproj"
+$bundleTemplate = Join-Path $repositoryRoot "AppStore\ObjectRenamer.bundle"
 $artifactsRoot = Join-Path $repositoryRoot "AppStore\artifacts"
-$bundle = Join-Path $artifactsRoot "Renamer.bundle"
-$ribbonSource = Join-Path $repositoryRoot "AppStore\Ribbon\Renamer"
-$outputZip = Join-Path $artifactsRoot "Renamer-1.0.0-Autodesk-Marketplace.zip"
+$bundle = Join-Path $artifactsRoot "ObjectRenamer.bundle"
+$ribbonSource = Join-Path $repositoryRoot "AppStore\Ribbon\ObjectRenamer"
+$outputZip = Join-Path $artifactsRoot "Object-Renamer-1.0.0-Autodesk-Marketplace.zip"
 
 function Assert-AutoCADApi {
     param(
@@ -48,8 +48,8 @@ Assert-AutoCADApi -Version "2027" -Directory $AutoCAD2027Dir
 
 $storeListing = Join-Path $repositoryRoot "AppStore\STORE-LISTING.md"
 if (-not (Test-Path -LiteralPath $storeListing -PathType Leaf) -or
-    (Get-Content -LiteralPath $storeListing -Raw) -notmatch [regex]::Escape("https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues")) {
-    throw "STORE-LISTING.md must contain the explicit Renamer support page."
+    (Get-Content -LiteralPath $storeListing -Raw) -notmatch [regex]::Escape("https://github.com/OliversDev/Object-Renamer-for-AutoCAD/issues")) {
+    throw "STORE-LISTING.md must contain the explicit Object Renamer support page."
 }
 
 $manifestTemplatePath = Join-Path $bundleTemplate "PackageContents.xml"
@@ -77,12 +77,12 @@ if ([string]::IsNullOrWhiteSpace([string]$companyDetails.Name) -or
     throw "CompanyDetails must contain Name, URL, and Email."
 }
 
-$supportUrl = "https://github.com/OliversDev/Renamer-App-for-AutoCAD/issues"
+$supportUrl = "https://github.com/OliversDev/Object-Renamer-for-AutoCAD/issues"
 $contactDocuments = @(
     (Join-Path $repositoryRoot "README.md"),
     (Join-Path $repositoryRoot "PRIVACY.md"),
     $storeListing,
-    (Join-Path $bundleTemplate "Contents\Help\Renamer.html"),
+    (Join-Path $bundleTemplate "Contents\Help\ObjectRenamer.html"),
     (Join-Path $bundleTemplate "Contents\Help\index.html"),
     (Join-Path $bundleTemplate "Contents\Help\privacy.html")
 )
@@ -101,8 +101,8 @@ foreach ($contactDocument in $contactDocuments) {
 }
 
 $licensedIconFiles = @(
-    (Join-Path $repositoryRoot "Renamer App for AutoCAD\Resources\LI-In-Bug.png"),
-    (Join-Path $repositoryRoot "Renamer App for AutoCAD\Resources\github-mark-white.png")
+    (Join-Path $repositoryRoot "Object Renamer\Resources\LI-In-Bug.png"),
+    (Join-Path $repositoryRoot "Object Renamer\Resources\github-mark-white.png")
 )
 foreach ($licensedIconFile in $licensedIconFiles) {
     if (-not (Test-Path -LiteralPath $licensedIconFile -PathType Leaf)) {
@@ -118,7 +118,7 @@ if ($thirdPartyNoticeText -notmatch 'Dazzle Pro Icons' -or
     throw "THIRD-PARTY-NOTICES.txt must identify the licensed Dazzle social icons and exclude them from the MIT License."
 }
 
-$mainFormSourcePath = Join-Path $repositoryRoot "Renamer App for AutoCAD\MainForm.cs"
+$mainFormSourcePath = Join-Path $repositoryRoot "Object Renamer\MainForm.cs"
 $mainFormSource = Get-Content -LiteralPath $mainFormSourcePath -Raw
 if ($mainFormSource -notmatch 'ObjectKind\.TextStyles,\s*new ObjectDefinition\(ObjectKind\.TextStyles,\s*"Text Style",\s*"Text Styles",\s*"Style"\)') {
     throw "Text Styles must generate AutoCAD -RENAME commands with the valid Style keyword."
@@ -168,13 +168,13 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 foreach ($version in @("2026", "2027")) {
-    $sourceDll = Join-Path $repositoryRoot "Renamer App for AutoCAD\bin\Release\AutoCAD$version\Renamer App for AutoCAD.dll"
+    $sourceDll = Join-Path $repositoryRoot "Object Renamer\bin\Release\AutoCAD$version\Object Renamer.dll"
     if (-not (Test-Path -LiteralPath $sourceDll -PathType Leaf)) {
         throw "The AutoCAD $version build did not produce the expected DLL: '$sourceDll'."
     }
     $destinationDir = Join-Path $bundle "Contents\$version"
     New-Item -ItemType Directory -Path $destinationDir -Force | Out-Null
-    Copy-Item -LiteralPath $sourceDll -Destination (Join-Path $destinationDir "Renamer App for AutoCAD.dll") -Force
+    Copy-Item -LiteralPath $sourceDll -Destination (Join-Path $destinationDir "Object Renamer.dll") -Force
 }
 
 $resourcesDir = Join-Path $bundle "Contents\Resources"
@@ -203,8 +203,8 @@ $requiredRibbonFiles = @(
     "TabletMenuRoot.cui",
     "ToolbarRoot.cui",
     "WorkspaceRoot.cui",
-    "Renamer16.png",
-    "Renamer32.png"
+    "ObjectRenamer16.png",
+    "ObjectRenamer32.png"
 )
 
 foreach ($fileName in $requiredRibbonFiles) {
@@ -217,14 +217,14 @@ foreach ($fileName in $requiredRibbonFiles) {
 # Autodesk review requires the partial ribbon to merge into the built-in
 # Add-ins tab and expose contextual F1 help. Keep these acceptance checks
 # here so a future CUI edit cannot accidentally recreate a product-specific tab
-# or remove Renamer help.
+# or remove Object Renamer help.
 [xml]$ribbonDefinition = Get-Content -LiteralPath (Join-Path $ribbonSource "RibbonRoot.cui") -Raw
 $tabDefinition = $ribbonDefinition.RibbonRoot.RibbonTabSourceCollection.RibbonTabSource
 if ($tabDefinition.UID -ne "ID_ADDINSTAB" -or
     $tabDefinition.Alias -ne "ID_ADDINSTAB" -or
     $tabDefinition.DefaultDisplay -ne "AddToWorkspace" -or
     $tabDefinition.WorkspaceBehavior -ne "MergeTabOnly") {
-    throw "Renamer must use and merge into ID_ADDINSTAB with AddToWorkspace and MergeTabOnly."
+    throw "Object Renamer must use and merge into ID_ADDINSTAB with AddToWorkspace and MergeTabOnly."
 }
 
 [xml]$macroDefinition = Get-Content -LiteralPath (Join-Path $ribbonSource "MenuGroup.cui") -Raw
@@ -233,8 +233,8 @@ $tooltipDefinition = $macroNode.ToolTip
 if ($null -ne $macroNode.SelectSingleNode("CLICommand") -or
     $tooltipDefinition.HasAttribute("CommandName") -or
     $tooltipDefinition.EnableHelp -ne "true" -or
-    $tooltipDefinition.HelpSource -ne "Renamer.html#renamer") {
-    throw "Renamer ribbon must omit CLICommand and tooltip CommandName while retaining contextual F1 help."
+    $tooltipDefinition.HelpSource -ne "ObjectRenamer.html#object-renamer") {
+    throw "Object Renamer ribbon must omit CLICommand and tooltip CommandName while retaining contextual F1 help."
 }
 
 [xml]$manifestDefinition = Get-Content -LiteralPath (Join-Path $bundle "PackageContents.xml") -Raw
@@ -268,20 +268,24 @@ foreach ($componentSet in $componentSets) {
 
     $managedEntry = @($componentSet.ComponentEntry) | Where-Object { $_.ModuleName -like "*.dll" }
     $command = $managedEntry.Commands.Command
-    if ($command.Global -ne "OW:Renamer" -or $command.HelpTopic -ne "#renamer") {
-        throw "The Renamer command or contextual help topic is not registered correctly."
+    if ($command.Global -ne "OW:ObjectRenamer" -or $command.HelpTopic -ne "#object-renamer") {
+        throw "The Object Renamer command or contextual help topic is not registered correctly."
     }
 }
 
-$namedHelp = Join-Path $bundle "Contents\Help\Renamer.html"
+$namedHelp = Join-Path $bundle "Contents\Help\ObjectRenamer.html"
 if (-not (Test-Path -LiteralPath $namedHelp -PathType Leaf)) {
-    throw "The app-specific Renamer.html help page is missing."
+    throw "The app-specific ObjectRenamer.html help page is missing."
+}
+$namedHelpText = Get-Content -LiteralPath $namedHelp -Raw
+if ($namedHelpText -notmatch '<body\s+id=["'']object-renamer["'']') {
+    throw "ObjectRenamer.html must expose the object-renamer anchor used by contextual F1 help."
 }
 
-$ribbonWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("RenamerCuix_" + [Guid]::NewGuid().ToString("N").Substring(0, 8))
+$ribbonWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("ObjectRenamerCuix_" + [Guid]::NewGuid().ToString("N").Substring(0, 8))
 $ribbonPackageRoot = Join-Path $ribbonWorkRoot "Package"
-$ribbonZip = Join-Path $ribbonWorkRoot "Renamer.zip"
-$ribbonCuix = Join-Path $resourcesDir "Renamer.cuix"
+$ribbonZip = Join-Path $ribbonWorkRoot "ObjectRenamer.zip"
+$ribbonCuix = Join-Path $resourcesDir "ObjectRenamer.cuix"
 
 try {
     New-Item -ItemType Directory -Path $ribbonPackageRoot -Force | Out-Null
@@ -304,13 +308,13 @@ finally {
 }
 
 Copy-Item `
-    -LiteralPath (Join-Path $repositoryRoot "Renamer App for AutoCAD\RenamerIcon.ico") `
-    -Destination (Join-Path $resourcesDir "Renamer.ico") `
+    -LiteralPath (Join-Path $repositoryRoot "Object Renamer\ObjectRenamerIcon.ico") `
+    -Destination (Join-Path $resourcesDir "ObjectRenamer.ico") `
     -Force
 
 Copy-Item `
-    -LiteralPath (Join-Path $repositoryRoot "AppStore\Renamer.bundle\Contents\Help\Renamer.html") `
-    -Destination (Join-Path $helpDir "Renamer.html") `
+    -LiteralPath (Join-Path $repositoryRoot "AppStore\ObjectRenamer.bundle\Contents\Help\ObjectRenamer.html") `
+    -Destination (Join-Path $helpDir "ObjectRenamer.html") `
     -Force
 
 Copy-Item `
@@ -325,11 +329,11 @@ Copy-Item `
 
 $requiredBundleFiles = @(
     "PackageContents.xml",
-    "Contents\2026\Renamer App for AutoCAD.dll",
-    "Contents\2027\Renamer App for AutoCAD.dll",
-    "Contents\Resources\Renamer.cuix",
-    "Contents\Resources\Renamer.ico",
-    "Contents\Help\Renamer.html",
+    "Contents\2026\Object Renamer.dll",
+    "Contents\2027\Object Renamer.dll",
+    "Contents\Resources\ObjectRenamer.cuix",
+    "Contents\Resources\ObjectRenamer.ico",
+    "Contents\Help\ObjectRenamer.html",
     "Contents\Help\index.html",
     "Contents\Help\privacy.html",
     "Contents\Help\license.html",
@@ -356,14 +360,14 @@ $archive = [IO.Compression.ZipFile]::OpenRead($outputZip)
 try {
     $archiveNames = @($archive.Entries | ForEach-Object { $_.FullName.Replace('/', '\') })
     foreach ($relativePath in $requiredBundleFiles) {
-        $archivePath = "Renamer.bundle\$relativePath"
+        $archivePath = "ObjectRenamer.bundle\$relativePath"
         if ($archiveNames -notcontains $archivePath) {
             throw "The generated Marketplace ZIP is missing: '$archivePath'."
         }
     }
 
     $unexpectedEntries = @($archiveNames | Where-Object {
-        $_ -notlike "Renamer.bundle\*" -or
+        $_ -notlike "ObjectRenamer.bundle\*" -or
         $_ -match '\.(pdb|cs|resx|bak)$'
     })
     if ($unexpectedEntries.Count -gt 0) {

@@ -2,13 +2,13 @@ Dazzle Pro Icons
 Copyright (c) Dazzle-UI, Inc. All Rights Reserved.
 License: Purchased Dazzle-UI Professional Solo License
 
-Renamer uses licensed Dazzle Pro GitHub and LinkedIn icons as part of the
-Renamer end product. These proprietary icon files are not covered by the MIT
+Object Renamer uses licensed Dazzle Pro GitHub and LinkedIn icons as part of the
+Object Renamer end product. These proprietary icon files are not covered by the MIT
 License in LICENSE.txt or LICENSE.html. No rights to copy, extract, reproduce,
 redistribute, sublicense, resell, or reuse them are granted by this repository;
 their use remains subject to the purchased Dazzle license.
 
 https://dazzleui.pro/
 
-Autodesk and AutoCAD are registered trademarks of Autodesk, Inc. Renamer
+Autodesk and AutoCAD are registered trademarks of Autodesk, Inc. Object Renamer
 is not affiliated with, endorsed by, sponsored by, or supported by Autodesk, Inc.

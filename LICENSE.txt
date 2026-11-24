@@ -1,4 +1,4 @@
-Renamer License
+Object Renamer License
 
 Copyright (c) 2024-2026 Oliver Wackenreuther
 
@@ -48,7 +48,7 @@ ACCEPTS THESE RISKS AND LIMITATIONS.
 2. MIT License
 
 The MIT License below applies only to software and assets authored by the
-publisher and included with Renamer. Third-party names and trademarks remain
+publisher and included with Object Renamer. Third-party names and trademarks remain
 the property of their respective owners and are not granted under this license.
 
 Copyright (c) 2024-2026 Oliver Wackenreuther
