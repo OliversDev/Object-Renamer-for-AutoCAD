@@ -77,7 +77,6 @@ namespace AutoCADRenamer
             {
                 if (stream == null) return;
                 using (Icon source = new Icon(stream)) Icon = (Icon)source.Clone();
-                if (Logo != null) Logo.Image = Icon.ToBitmap();
             }
         }
 
@@ -769,10 +768,10 @@ namespace AutoCADRenamer
             var sections = new List<string>();
             if (duplicateTargets.Count > 0)
                 sections.Add("Multiple objects of the same type are being renamed to the same name:\r\n" +
-                             string.Join("\r\n", duplicateTargets.Select(value => "  â€¢ " + value)));
+                             string.Join("\r\n", duplicateTargets.Select(value => "  • " + value)));
             if (repeatedSources.Count > 0)
                 sections.Add("The same existing object is being renamed more than once:\r\n" +
-                             string.Join("\r\n", repeatedSources.Select(value => "  â€¢ " + value)));
+                             string.Join("\r\n", repeatedSources.Select(value => "  • " + value)));
             return string.Join("\r\n\r\n", sections);
         }
 
@@ -895,6 +894,7 @@ namespace AutoCADRenamer
             OpenUrl(candidates.FirstOrDefault(File.Exists) ?? fallbackUrl);
         }
 
+        private void Logo_Click(object sender, EventArgs e) { OpenUrl("https://ca.linkedin.com/in/oliverwackenreuther"); }
         private void GitHub_Click(object sender, EventArgs e) { OpenUrl("https://github.com/OliversDev"); }
         private void LinkedIn_Click(object sender, EventArgs e) { OpenUrl("https://ca.linkedin.com/in/oliverwackenreuther"); }
         private void linkLblFootnote_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) { OpenUrl("https://ca.linkedin.com/in/oliverwackenreuther"); }

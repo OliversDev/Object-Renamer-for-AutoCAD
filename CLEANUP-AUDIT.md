@@ -6,7 +6,7 @@
 
 ## Intentionally retained
 
-- The former UI logo resource was removed; the form now uses the same text-free Object Renamer icon as the title bar, ribbon, bundle, and Marketplace listing.
+- The text-free Object Renamer icon is used for the title bar, ribbon, bundle, and Marketplace listing; the separate OW author logo remains in the footer and links to the author profile.
 - `Object Renamer/Resources/LI-In-Bug.png` and `github-mark-white.png` are intentionally retained, referenced by `Properties/Resources.resx`, and used by the footer. Their license is documented in `THIRD-PARTY-NOTICES.txt`; they are not covered by the MIT License.
 - The project and Marketplace copies of `ObjectRenamerIcon.ico` are identical but required in separate source and submission locations.
 - Root `LICENSE.html` and bundled `Contents/Help/license.html` are identical by design; the build copies the root source into the staged bundle.

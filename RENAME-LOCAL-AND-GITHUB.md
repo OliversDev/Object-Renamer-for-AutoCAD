@@ -39,6 +39,6 @@ If the default branch is `main`, use `git push origin main` instead. GitHub norm
 
 ## 3. Marketplace resubmission
 
-Build and submit `AppStore\artifacts\Object-Renamer-1.0.0-Autodesk-Marketplace.zip`. The icon no longer contains text, the application UI uses the same Object Renamer icon instead of the previous logo, and the bundle validates the matching contextual F1 help target before packaging.
+Build and submit `AppStore\artifacts\Object-Renamer-1.0.0-Autodesk-Marketplace.zip`. The title bar, ribbon, bundle, and Marketplace assets use the text-free Object Renamer icon; the footer retains the clickable OW author logo. The bundle validates the matching contextual F1 help target before packaging.
 
 The installer remains unsigned. Autodesk stated that code signing is recommended but is not mandatory for publication.

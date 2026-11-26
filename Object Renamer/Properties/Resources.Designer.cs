@@ -79,5 +79,15 @@ namespace Renamer_App_for_AutoCAD.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        /// <summary>
+        ///   Looks up the Oliver Wackenreuther footer logo.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_BW_NOBG {
+            get {
+                object obj = ResourceManager.GetObject("Logo_BW-NOBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -38,7 +38,7 @@ Object Renamer supports 64-bit AutoCAD 2026 and AutoCAD 2027. AutoCAD may reject
 
 ## Commands
 
-- `OW:ObjectRenamer` â€” opens Object Renamer.
+- `OW:ObjectRenamer` — opens Object Renamer.
 
 ## Privacy
 

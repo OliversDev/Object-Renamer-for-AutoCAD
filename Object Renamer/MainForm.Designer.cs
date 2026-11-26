@@ -422,9 +422,10 @@ namespace AutoCADRenamer
             footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             footerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
-            // The application icon is assigned at runtime by ApplyApplicationIcon.
-            // Do not use Autodesk or AutoCAD artwork in the application UI.
-            Logo = IconBox(null, 54);
+            // Keep the OW footer brand separate from the window/application icon.
+            Logo = IconBox(Renamer_App_for_AutoCAD.Properties.Resources.Logo_BW_NOBG, 54);
+            Logo.Cursor = Cursors.Hand;
+            Logo.Click += Logo_Click;
             footerPanel.Controls.Add(Logo, 0, 0);
 
             GitHub = IconBox(Renamer_App_for_AutoCAD.Properties.Resources.github_mark_white, 30);

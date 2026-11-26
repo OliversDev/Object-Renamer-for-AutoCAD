@@ -48,7 +48,7 @@ Assert-AutoCADApi -Version "2027" -Directory $AutoCAD2027Dir
 
 $storeListing = Join-Path $repositoryRoot "AppStore\STORE-LISTING.md"
 if (-not (Test-Path -LiteralPath $storeListing -PathType Leaf) -or
-    (Get-Content -LiteralPath $storeListing -Raw) -notmatch [regex]::Escape("https://github.com/OliversDev/Object-Renamer-for-AutoCAD/issues")) {
+    (Get-Content -LiteralPath $storeListing -Raw -Encoding UTF8) -notmatch [regex]::Escape("https://github.com/OliversDev/Object-Renamer-for-AutoCAD/issues")) {
     throw "STORE-LISTING.md must contain the explicit Object Renamer support page."
 }
 
@@ -136,7 +136,7 @@ $documentationFiles = @(
     (Join-Path $repositoryRoot "AppStore\RELEASE-CHECKLIST.md")
 )
 foreach ($documentationFile in $documentationFiles) {
-    if ((Get-Content -LiteralPath $documentationFile -Raw) -match '\u00C3|\u00E2\u20AC') {
+    if ((Get-Content -LiteralPath $documentationFile -Raw -Encoding UTF8) -match '\u00C3|\u00E2\u20AC') {
         throw "UTF-8 mojibake remains in '$documentationFile'."
     }
 }
